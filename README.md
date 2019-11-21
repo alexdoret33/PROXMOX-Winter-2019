@@ -1,7 +1,7 @@
 # PROXMOX-Winter-2019
 Projet PROXMOX + Portail Captif
 
-### Sommaire : 
+## Sommaire : 
  1. Pré-requis d'architecture.
  2. But du projet.
  3. Déroulement du projet.
