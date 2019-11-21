@@ -28,4 +28,4 @@ Nous allons commencer par installer un serveur Proxmox sur un serveur hébergé.
 
 ## 4. Schéma d'architecture.
 
-
+![C:\Users\Jonathan\Desktop\Cours OpenSource]
