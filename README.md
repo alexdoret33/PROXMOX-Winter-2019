@@ -21,6 +21,7 @@ OS : Linux CentOS
 ## 2. But du projet :
 
 Le projet consiste à faire monter des VM avec Ansible sur le serveur Proxmox. Et comme exemple on va monter un portail captif.
+Le but de ce projet est de pouvoir facilement déployer une infrastructure vers un site distant. Et également pouvoir changer les configurations des VMs distantes.
 
 ## 3. Déroulement du projet :
 
