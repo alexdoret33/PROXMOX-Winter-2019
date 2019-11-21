@@ -1,5 +1,5 @@
 # PROXMOX-Winter-2019
-Projet PROXMOX + Portail Captif
+Projet PROXMOX 
 
 ## Sommaire : 
  1. Pré-requis d'architecture.
