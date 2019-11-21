@@ -27,5 +27,3 @@ Le projet consiste à faire monter des VM avec Ansible sur le serveur Proxmox. E
 Nous allons commencer par installer un serveur Proxmox sur un serveur hébergé. Et faire monter des VMs Linux avec des configurations spécifiques tel qu'un portail captif, un serveur apache à l'aide d'Ansible. Afin de pouvoir déployer un environnement / configuration à distance sur des serveurs qui ne sont pas hébergés chez nous. Ils utilisent une technologie différente de celle qu'on utilise habituellement (Proxmox). 
 
 ## 4. Schéma d'architecture.
-
-![Schema](C:\Users\Jonathan\Desktop\Cours OpenSource2019-11-21 16_26_16-Untitled Diagram.drawio - draw.io.png)
