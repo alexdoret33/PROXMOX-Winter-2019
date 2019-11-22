@@ -15,7 +15,7 @@ Serveur Proxmox hébergé chez Kimsufi :
 Processeur : i5-750 4 coeurs 2.67GHz.  
 RAM : 16Go DDR3 1333MHz.  
 Disque dur : 2To.  
-OS : Linux Debian 10.
+OS : Linux Debian 10.  
 Nom de la VM : Prox6Node1  
 
 ## 2. Inventaire Technologique 
