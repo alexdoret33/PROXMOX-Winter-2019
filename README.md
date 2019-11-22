@@ -23,10 +23,7 @@ Nom de la VM : Prox6Node1
 
 Pour notre Lab nous allons utiliser la solution Proxmox 6.0.15 sur une Debian 10.  
 Ansible 2.9 afin de lancer des payblooks de création de VMs ou de configuration.  
-Et déployer 3 VMs avec un orchestrateur Jenkins 2.205, une VM avec pfSense 2.4.4-p3 et un site web sous WordPress en 5.2.4.
-=======
-OS : Linux Debian 9 .  
->>>>>>> c94ff03d27345aba5bb94baa7dbdc4ff74dcd07b
+Et déployer 3 VMs avec un orchestrateur Jenkins 2.205, une VM avec pfSense 2.4.4-p3 et un site web sous WordPress en 5.2.4.  
 
 ## 3. But du projet :
 
