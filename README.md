@@ -26,7 +26,7 @@ Et déployer 3 VMs avec un orchestrateur Jenkins 2.205, une VM avec pfSense 2.4.
 
 ### 3. But du projet :
 
-Le projet consiste à faire monter des VM avec Ansible sur le serveur Proxmox. Et comme exemple on va monter un portail captif.
+Le projet consiste à faire monter des VM avec Ansible sur le serveur Proxmox. Et comme exemple on va monter un orchestrateur,un pfSense et un site sous WordPress.
 Le but de ce projet est de pouvoir facilement déployer une infrastructure vers un site distant.  
 Et également pouvoir changer les configurations des VMs distantes.
 
