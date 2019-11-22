@@ -30,5 +30,3 @@ Nous allons commencer par installer un serveur Proxmox sur un serveur hébergé.
 
 ## 4. Schéma d'architecture.
 ![alt text](https://github.com/alexdoret33/PROXMOX-Winter-2019/blob/master/Images/Diagramme%20Cool.png?raw=true)
-
-'test'
