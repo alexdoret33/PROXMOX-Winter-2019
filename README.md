@@ -40,7 +40,7 @@ Proxmox (Proxmox Virtual Environment) est une solution de virtualisation basé s
 Nous allons commencer par installer un serveur Proxmox sur un serveur hébergé et faire monter des VMs Linux avec des configurations spécifiques. Un serveur WordPress et un pfSense ce qui va permettre de faire du NAT et du PAT pour accéder aux VM crée à l'aide d'Ansible. Afin de pouvoir déployer un environnement / configuration à distance sur des serveurs qui ne sont pas hébergés chez nous, nous allons utiliser une technologie différente de celle que l'on utilise habituellement : Proxmox. 
 
 ### 7. Schéma d'architecture :
-![alt text](https://github.com/alexdoret33/PROXMOX-Winter-2019/blob/master/Images/Diagramme%20Cool.png?raw=true)
+![alt text](https://github.com/alexdoret33/PROXMOX-Winter-2019/blob/master/Images/Diagramme.jpg)
 
 ### 8. Gestion du Maintien en Conditions Opérationnelles : 
 
