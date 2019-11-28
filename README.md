@@ -5,9 +5,11 @@
  1. Pré-requis d'architecture.
  2. Inventaire Technologique
  3. But du projet.
- 4. Déroulement du projet.
- 5. Schéma d'architecture.
- 6. Gestion du Maintien en Conditions Opérationnelles. 
+ 4. Qu'est-ce que Proxmox ?
+ 5. Schéma Réseau
+ 6. Déroulement du projet.
+ 7. Schéma d'architecture.
+ 8. Gestion du Maintien en Conditions Opérationnelles. 
 ### 1.Pré-requis d'architecture :
 
 Serveur Proxmox hébergé chez Kimsufi :
