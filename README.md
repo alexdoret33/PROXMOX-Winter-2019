@@ -30,14 +30,19 @@ Le projet consiste à faire monter des VM avec Ansible sur le serveur Proxmox.
 Le but de ce projet est de pouvoir facilement déployer une infrastructure (Monitorée et sauvegardée).  
 Et également pouvoir changer les configurations des VMs distantes.
 
-### 4. Déroulement du projet :
+### 4. Qu'est-ce que Proxmox ?
+Proxmox (Proxmox Virtual Environment) est une solution de virtualisation basé sur Linux KVM (Debian 64bits) permettant de créer des machines virtuelles de type OpenVZ et KVM. Il s’agit d’une solution de type bare metal (métal nu en français), dans le sens de directement opérationnel sur la machine, c’est-à-dire sans OS. Ce nom caractérise les hyperviseurs de type 1 (on dit aussi natif) dans lequel l’hyperviseur minimaliste, allégé et optimisé, se conduit comme un moniteur démarrant le matériel, connectant le réseau et lançant les machines virtuelles. ESX Server de VMware, LPAR de IBM ou encore HYPER-V de Microsoft sont des hyperviseurs type 1. Proxmox s’administre via une interface web (https://serveur_proxmox:8006/ ) et fournit une vue globale de l’ensemble des VM installées . En plus de cette interface web, il est tout à fait possible de créer des scripts pour automatiser certaines tâches, via les commandes natives de OpenVZ (vzctl).
+
+### 5. Schéma Réseau :
+
+### 6. Déroulement du projet :
 
 Nous allons commencer par installer un serveur Proxmox sur un serveur hébergé et faire monter des VMs Linux avec des configurations spécifiques. Un serveur WordPress et un pfSense ce qui va permettre de faire du NAT et du PAT pour accéder aux VM crée à l'aide d'Ansible. Afin de pouvoir déployer un environnement / configuration à distance sur des serveurs qui ne sont pas hébergés chez nous, nous allons utiliser une technologie différente de celle que l'on utilise habituellement : Proxmox. 
 
-### 5. Schéma d'architecture :
+### 7. Schéma d'architecture :
 ![alt text](https://github.com/alexdoret33/PROXMOX-Winter-2019/blob/master/Images/Diagramme%20Cool.png?raw=true)
 
-### 6. Gestion du Maintien en Conditions Opérationnelles : 
+### 8. Gestion du Maintien en Conditions Opérationnelles : 
 
 *Moyen de sauvegarde :* Tous les matins une sauvegarde sera réalisée de chacune des VM via un playbook qui lancera des commandes `vzdump`.
 **Exemple : ** `ansible-playbook -i ....`
