@@ -47,7 +47,7 @@ Nous allons commencer par installer un serveur Proxmox sur un serveur hébergé 
 ### 8. Gestion du Maintien en Conditions Opérationnelles : 
 
 *Moyen de sauvegarde :* Tous les matins une sauvegarde sera réalisée de chacune des VM via un playbook qui lancera des commandes `vzdump`.
-**Exemple : ** `ansible-playbook -i ....`
+**Exemple :** `ansible-playbook -i ....`
 
 *Création d'une VM :* Lancer le playbook "Nom_du_Playbood" qui créera la VM voulu.
 **Exemple :** `ansible-playbook -i ....`
