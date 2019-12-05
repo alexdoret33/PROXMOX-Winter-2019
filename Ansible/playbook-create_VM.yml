@@ -1,31 +1,48 @@
----
-- hosts: all
-  connection: local
+- hosts: pve
+  tasks:
+    - name: version PVE
+      shell: pveversion
+      register: release
 
-tasks:
-- name: Create VM 
-  proxmox_kvm: 
-    node: prox6node01
-    api_user: ansible@pve
-    api_password: Pr0jet0penSource!
-    api_host: 91.121.112.154:8006
-    password: 123456
-    hostname: example
-    ostemplate: 'local:/var/lib/vz/template/iso/debian-10.2.0-amd64-netinst.iso'
-    netif: '{"net0":"name=eth0,ip=192.168.0.67/24,gw=192.168.0.1,bridge=vmbr0"}'
-    vmid: 200
-    storage: local-lvm
-    state: present
-    nameserver: 'test'
-    cpus: 1
-    cores: 2
-    memory: 2048
-    disk: 10
-    
-- name: Start VM
-  promox: 
-    api_host: node1
-    api_user: ansible@pve
-    api_password: Pr0jet0penSource!
-    vmid: 200
-    state: started
+    - name: Notification version PVE
+      debug: msg="Version de PVE {{ release.stdout }}"
+
+    - name: Mise à jour des dépôts
+      apt: update_cache=yes
+
+    - name: Mise à jour des paquets
+      apt: upgrade=dist
+
+    - name: version Kernel dispo
+      shell: ls -t /boot/vmlinuz-* | sed "s/\/boot\/vmlinuz-//g" | head -n1
+      register: kernel_dispo
+
+    - name: version kernel actuel
+      shell: uname -r
+      register: kernel_actuel
+
+    - name: vérification version kernel
+      debug: msg="Ce PVE doit être redémarré, kernel actuel {{ kernel_actuel.stdout }} kernel disponible {{ kernel_dispo.stdout }}"
+
+      when: kernel_dispo.stdout != kernel_actuel.stdout
+
+    - name: Vérification de la version de PVE
+      shell:  pveversion
+      register: new_release
+
+    - name: Notification de la mise à niveau de la version de PVE
+      debug: msg="PVE à changé de version {{ release.stdout }} à {{ new_release.stdout }}"
+      when: release.stdout != new_release.stdout
+
+    - name: Vérification de la présence de needrestart
+      apt: name=needrestart state=present
+
+    - name: Lister les services a rédémarrer
+      shell: needrestart -rl
+      register: services
+
+    - name: Afficher les services à redémarrer
+      debug: msg="{{ services.stdout_lines }}"
+
+    - name: Redémarrage des services
+      shell: needrestart -ra

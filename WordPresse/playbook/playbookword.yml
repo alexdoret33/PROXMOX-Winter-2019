@@ -1,0 +1,26 @@
+- hosts: PROXMOX
+  environment:
+    https_proxy: http://91.121.112.154:2222
+
+  tasks:
+   - name: Run a Update packages list
+     apt: update_cache=yes
+
+   - name: install git
+     apt:
+      name: git
+      state: present
+
+   - name: Clone ceph-dash
+     git:
+      repo: 'https://github.com/Crapworks/ceph-dash.git'
+      dest: /opt/ceph-dash
+
+   - name: creat service ceph-dash.service
+     template: src=services/services.service dest=/etc/systemd/system/services.service mode=644
+
+   - name: reload daemon systemd
+     shell: systemctl daemon-reload
+
+   - name: start services.service
+     service: name=services.service state=started enabled=yes
