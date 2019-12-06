@@ -1,13 +1,16 @@
 ---
-# tasks file for mysql
-- name: Create mysql database
-  mysql_db: name={{ wp_mysql_db }} state=present
+- name: installation Mysqls
+  apt:
+    name: mariadb-server-10.1,python-mysqldb
+    state: latest
   become: yes
 
-- name: Create mysql user
-  mysql_user: 
-    name={{ wp_mysql_user }} 
-    password={{ wp_mysql_password }} 
-    priv=*.*:ALL
+- name: Install python-selinux
+  apt: name=python-selinux state=present
+  become: yes
 
-  become: yes 
+- name: Make sure a service is running
+  systemd:
+    state: started
+    enabled: yes
+    name: mariadb
