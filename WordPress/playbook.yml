@@ -1,0 +1,18 @@
+- hosts: all
+  gather_facts: False
+  
+  tasks:
+  - name: install python 2
+    raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+
+#- authorized_key: 
+  #  user: "alex" 
+  # key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCUQ4Q3ATEGyEAgTrEe/sBtOA06USmxywG5sFOE/R0bvAlXJBvA2Ifn0oHo1UQb9BMZZ4NTOWGLctiIq/XRQ7minseHdWAYZXHE4arwYQp+QeatVhp8ytdyzm1hFTbCHI/VYxna4abSnudwrrlpWnZcMhK0m16/YnUs3gkne23dBHH95Srgr0IP3VuFDwyBCeFw01hWO8K29hqMFtLdmOPMW6uaNp5taqN9F11dYZ5aUCf8r4OXdPOa2s9f6NgIwTQy0o5KEVM6W8FcDrsTp3DVWnmlqq3U/2qdPKw64DUhtSdyWf6Fp0o14hcinU6HJSuP6B02FfnzffkevXLH+Ex7 alex@M
+
+- hosts: wordpress
+
+  roles:
+    - server
+    - php
+    - mysql
+    - wordpress
