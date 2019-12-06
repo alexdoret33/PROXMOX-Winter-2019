@@ -11,6 +11,8 @@
  7. Déroulement du projet.
  8. Schéma d'architecture.
  9. Gestion du Maintien en Conditions Opérationnelles. 
+ 10. Problème rencontré.
+
 ### 1.Pré-requis d'architecture :
 
 Serveur Proxmox hébergé chez Kimsufi :
@@ -42,7 +44,22 @@ pfSense est un pare-feu open source, il utilise Packet Filter pour des fonctions
 
 Après une brève installation manuelle pour assigner les interfaces réseaux, il s'administre ensuite à distance depuis l'interface web et gère nativement les VLAN.
 
-Comme sur les distributions Linux, pfSense intègre aussi un gestionnaire de paquets pour installer des fonctionnalités supplémentaires comme un proxy, un serveur VoIP1, un Portail Captif...
+Comme sur les distributions Linux, pfSense intègre aussi un gestionnaire de paquets pour installer des fonctionnalités supplémentaires comme un proxy, un serveur VoIP1, un Portail Captif...//
+
+## pfSense dans notre projet :
+
+Le pfSense est utilisé pour faire du PAT et du NAT.
+En effet, des règles sont crées pour rediriger la connexion vers la VM en fonction du port.
+
+*Exemple :* 
+
+VM1 : 10.10.10.2 port 2222
+
+Règle Proxmox : si une connexion SSH est sur le port 2222, la connexion vers la VM1 est effectuée.
+
+Connexion SSH : <IP_PROXMOX>:2222
+
+Donc pour chaque VM crée, il faut une règle Proxmox associée pour pouvoir s'y connecter en ssh.
 
 ### 6. Schéma Réseau :
 
@@ -64,3 +81,18 @@ Nous allons commencer par installer un serveur Proxmox sur un serveur hébergé 
 **Exemple :** `ansible-playbook -i ....`
 
 *Suppression d'une VM :* Lancer le playbook "Nom_du_Playbook" afin de supprimer la VM correspondante. **Exemple :** `ansible-playbook -i ....`
+
+### 10. Problème rencontré :
+
+Lors du lancement du playbook Ansible vers notre Promox nous avons eu une erreur : 
+
+'authorization on proxmox cluster failed with exception: invalid literal for float(): 6.0-4'
+
+Nous avons du modifier la lib promox d'ansible afin de règler le soucis. Le problème a été fixé mais pas intégré à Ansible.
+Il suffit de modifier le fichier :
+
+'/home/User/.local/lib/python3.6/site-packages/ansible/modules/cloud/misc/proxmox_kvm.py'
+Et modifier la ligne : 
+
+'PVE_MAJOR_VERSION = 3 if float(proxmox.version.get()['version']) < 4.0 else 4'
+en : 'PVE_MAJOR_VERSION = int(proxmox.version.get()['version'].split('.', 1)[0])'

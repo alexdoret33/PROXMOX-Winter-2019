@@ -1,53 +1,3 @@
-<<<<<<< HEAD
-- hosts: pve
-  tasks:
-    - name: version PVE
-      shell: pveversion
-      register: release
-
-    - name: Notification version PVE
-      debug: msg="Version de PVE {{ release.stdout }}"
-
-    - name: Mise à jour des dépôts
-      apt: update_cache=yes
-
-    - name: Mise à jour des paquets
-      apt: upgrade=dist
-
-    - name: version Kernel dispo
-      shell: ls -t /boot/vmlinuz-* | sed "s/\/boot\/vmlinuz-//g" | head -n1
-      register: kernel_dispo
-
-    - name: version kernel actuel
-      shell: uname -r
-      register: kernel_actuel
-
-    - name: vérification version kernel
-      debug: msg="Ce PVE doit être redémarré, kernel actuel {{ kernel_actuel.stdout }} kernel disponible {{ kernel_dispo.stdout }}"
-
-      when: kernel_dispo.stdout != kernel_actuel.stdout
-
-    - name: Vérification de la version de PVE
-      shell:  pveversion
-      register: new_release
-
-    - name: Notification de la mise à niveau de la version de PVE
-      debug: msg="PVE à changé de version {{ release.stdout }} à {{ new_release.stdout }}"
-      when: release.stdout != new_release.stdout
-
-    - name: Vérification de la présence de needrestart
-      apt: name=needrestart state=present
-
-    - name: Lister les services a rédémarrer
-      shell: needrestart -rl
-      register: services
-
-    - name: Afficher les services à redémarrer
-      debug: msg="{{ services.stdout_lines }}"
-
-    - name: Redémarrage des services
-      shell: needrestart -ra
-=======
 ---
 - hosts: all
   connection: local
@@ -69,7 +19,7 @@
       memory: 512
       scsihw: "virtio-scsi-pci"
       scsi: '{"scsi10":"local:126,format=qcow2"}'
-      ide: '{"ide1":"local:iso/debian-10.2.0-amd64-netinst.iso,media=cdrom"}'
+      #ide: '{"ide1":"local:iso/debian-10.2.0-amd64-netinst.iso,media=cdrom"}'
       autostart: yes
   - name: Démarrer la VM.
     proxmox_kvm:
@@ -79,4 +29,3 @@
       api_password: Pr0jet0penSource!
       api_host: 91.121.112.154:8006
       state: started
->>>>>>> b438555f2a894e856a2c79fc9d2edf61e0020772
