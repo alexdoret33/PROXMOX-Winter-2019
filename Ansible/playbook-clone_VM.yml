@@ -8,15 +8,14 @@
       api_user    : ansible@pve
       api_password: Pr0jet0penSource!
       api_host    : 91.121.112.154:8006
-      clone       : Template-Debian-CloudInit   # The VM source
-      name        : "VMTest2"  # The target VM name
+      clone       : Template-Debian-CloudInit
+      name        : "VMTest3"  
       node        : prox6node01
       format      : qcow2
-
-  - name: Lancer une commande QM
-    user: jonathan
-    become: no
-    method: sudo
-    command:
-      shell: sudo qm set 104 --ipconfig0 ip=192.168.10.201/24,gw=192.168.10.254
-    #net: '{"net0":"name=eth0,ip=192.168.10.7/24,gw=192.168.10.254,bridge=vmbr2"}'
+      net: '{"net0":"name=eth0,ip=192.168.10.7/24,bridge=vmbr2"}'
+ # - name: Lancer une commande QM
+ #   user: jonathan
+ #   become: no
+ #   method: sudo
+ #   command:
+ #     shell: sudo qm set 104 --ipconfig0 ip=192.168.10.201/24,gw=192.168.10.254
