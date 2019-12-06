@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 - hosts: pve
   tasks:
     - name: version PVE
@@ -46,3 +47,36 @@
 
     - name: Redémarrage des services
       shell: needrestart -ra
+=======
+---
+- hosts: all
+  connection: local
+  
+  tasks:
+  - name: Create VM 
+    proxmox_kvm: 
+      node: prox6node01
+      name: "VMAnsible3"
+      api_user: ansible@pve
+      api_password: Pr0jet0penSource!
+      api_host: 91.121.112.154:8006
+      ostype: l26
+      #template: 'local:/var/lib/vz/template/iso/debian-10.2.0-amd64-netinst.iso'
+      net: '{"net0":"e1000,bridge=vmbr2,"}'
+      state: present
+      cpu: "kvm64"
+      cores: 1
+      memory: 512
+      scsihw: "virtio-scsi-pci"
+      scsi: '{"scsi10":"local:126,format=qcow2"}'
+      ide: '{"ide1":"local:iso/debian-10.2.0-amd64-netinst.iso,media=cdrom"}'
+      autostart: yes
+  - name: Démarrer la VM.
+    proxmox_kvm:
+      node: prox6node01
+      name: "VMAnsible3"
+      api_user: ansible@pve
+      api_password: Pr0jet0penSource!
+      api_host: 91.121.112.154:8006
+      state: started
+>>>>>>> b438555f2a894e856a2c79fc9d2edf61e0020772
