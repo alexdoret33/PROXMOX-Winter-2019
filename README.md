@@ -86,13 +86,13 @@ Nous allons commencer par installer un serveur Proxmox sur un serveur hébergé 
 
 Lors du lancement du playbook Ansible vers notre Promox nous avons eu une erreur : 
 
-'authorization on proxmox cluster failed with exception: invalid literal for float(): 6.0-4'
+`authorization on proxmox cluster failed with exception: invalid literal for float(): 6.0-4`
 
 Nous avons du modifier la lib promox d'ansible afin de règler le soucis. Le problème a été fixé mais pas intégré à Ansible.
 Il suffit de modifier le fichier :
 
-'/home/User/.local/lib/python3.6/site-packages/ansible/modules/cloud/misc/proxmox_kvm.py'
+`/home/User/.local/lib/python3.6/site-packages/ansible/modules/cloud/misc/proxmox_kvm.py`
 Et modifier la ligne : 
 
-'PVE_MAJOR_VERSION = 3 if float(proxmox.version.get()['version']) < 4.0 else 4'
-en : 'PVE_MAJOR_VERSION = int(proxmox.version.get()['version'].split('.', 1)[0])'
+`PVE_MAJOR_VERSION = 3 if float(proxmox.version.get()['version']) < 4.0 else 4`
+en : `PVE_MAJOR_VERSION = int(proxmox.version.get()['version'].split('.', 1)[0])`

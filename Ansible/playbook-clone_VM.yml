@@ -20,4 +20,3 @@
     command:
       shell: sudo qm set 104 --ipconfig0 ip=192.168.10.201/24,gw=192.168.10.254
     #net: '{"net0":"name=eth0,ip=192.168.10.7/24,gw=192.168.10.254,bridge=vmbr2"}'
-          
