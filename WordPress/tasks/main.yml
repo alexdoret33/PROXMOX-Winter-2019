@@ -8,15 +8,6 @@
     state: present
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_release != 'trusty'
 
-- name: Wordpress | Install nginx
-  apt:
-    pkg: nginx
-    update_cache: yes
-    cache_valid_time: 86400
-    state: present
-  when: wp_webserver == "nginx"
-
-- name: Wordpress | Install apache
   apt:
     pkg: ['apache2', 'libapache2-mod-php']
     update_cache: yes
