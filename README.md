@@ -6,10 +6,11 @@
  2. Inventaire Technologique
  3. But du projet.
  4. Qu'est-ce que Proxmox ?
- 5. Schéma Réseau
- 6. Déroulement du projet.
- 7. Schéma d'architecture.
- 8. Gestion du Maintien en Conditions Opérationnelles. 
+ 5. Qu'est-ce que pfSense ?
+ 6. Schéma Réseau
+ 7. Déroulement du projet.
+ 8. Schéma d'architecture.
+ 9. Gestion du Maintien en Conditions Opérationnelles. 
 ### 1.Pré-requis d'architecture :
 
 Serveur Proxmox hébergé chez Kimsufi :
@@ -35,18 +36,26 @@ Et également pouvoir changer les configurations des VMs distantes.
 ### 4. Qu'est-ce que Proxmox ?
 Proxmox est une solution de virtualisation basé sur Linux KVM (Debian 64bits) permettant de créer des machines virtuelles de type OpenVZ et KVM. Il s’agit d’une solution de type bare metal dans le sens de directement opérationnel sur la machine, c’est-à-dire sans OS. Ce nom caractérise les hyperviseurs de type 1 (on dit aussi natif) dans lequel l’hyperviseur minimaliste, allégé et optimisé, se conduit comme un moniteur démarrant le matériel, connectant le réseau et lançant les machines virtuelles. ESX Server de VMware, LPAR de IBM ou encore HYPER-V de Microsoft sont des hyperviseurs type 1. Proxmox s’administre via une interface web (https://serveur_proxmox:8006/ ) et fournit une vue globale de l’ensemble des VM installées . En plus de cette interface web, il est tout à fait possible de créer des scripts pour automatiser certaines tâches, via les commandes natives de OpenVZ (vzctl).
 
-### 5. Schéma Réseau :
+### 5. Qu'est-ce que pfSense ?
+
+pfSense est un pare-feu open source, il utilise Packet Filter pour des fonctions de routage et de NAT lui permettant de connecter plusieurs réseaux informatiques. Il comporte l'équivalent libre des outils et services utilisés habituellement sur des routeurs professionnels propriétaires. pfSense convient pour la sécurisation d'un réseau domestique ou de petite entreprise.
+
+Après une brève installation manuelle pour assigner les interfaces réseaux, il s'administre ensuite à distance depuis l'interface web et gère nativement les VLAN.
+
+Comme sur les distributions Linux, pfSense intègre aussi un gestionnaire de paquets pour installer des fonctionnalités supplémentaires comme un proxy, un serveur VoIP1, un Portail Captif...
+
+### 6. Schéma Réseau :
 
 ![alt text](https://github.com/alexdoret33/PROXMOX-Winter-2019/blob/master/Images/Schéma%20Réseau.jpg)
 
-### 6. Déroulement du projet :
+### 7. Déroulement du projet :
 
 Nous allons commencer par installer un serveur Proxmox sur un serveur hébergé et faire monter des VMs Linux avec des configurations spécifiques. Un serveur WordPress et un pfSense ce qui va permettre de faire du NAT et du PAT pour accéder aux VM crée à l'aide d'Ansible. Afin de pouvoir déployer un environnement / configuration à distance sur des serveurs qui ne sont pas hébergés chez nous, nous allons utiliser une technologie différente de celle que l'on utilise habituellement : Proxmox. 
 
-### 7. Schéma d'architecture :
+### 8. Schéma d'architecture :
 ![alt text](https://github.com/alexdoret33/PROXMOX-Winter-2019/blob/master/Images/Diagramme.jpg)
 
-### 8. Gestion du Maintien en Conditions Opérationnelles : 
+### 9. Gestion du Maintien en Conditions Opérationnelles : 
 
 *Moyen de sauvegarde :* Tous les matins une sauvegarde sera réalisée de chacune des VM via un playbook qui lancera des commandes `vzdump`.
 **Exemple :** `ansible-playbook -i ....`
