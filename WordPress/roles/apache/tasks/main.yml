@@ -1,18 +1,17 @@
 ---
 - name: installation apache
-  yum:
-    name: httpd,php,php-mysql
+  apt:
+    name: apache2,php,php-mysql
     state: latest
+  become: yes
 
-- name: Install libselinux-python
-  yum: name=libselinux-python state=present
-
-- name: On desactive SElinux
-  selinux:
-    state: disabled
+- name: Install libselinux-dev
+  yum: name=libselinux-dev state=present
+  become: yes
 
 - name: Make sure a service is running
   systemd:
     state: started
     enabled: yes
-    name: httpd
+    name: apache2
+  become: yes

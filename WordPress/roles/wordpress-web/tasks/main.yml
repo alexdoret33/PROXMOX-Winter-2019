@@ -1,18 +1,21 @@
 ---
 - name: Download WordPress
   get_url: url=https://fr.wordpress.org/latest-fr_FR.tar.gz dest=/var/www/html/wordpress.tar.gz
-
+  become: yes
 - name: Unarchive wordpress that is already on the remote machine
   unarchive:
     src: /var/www/html/wordpress.tar.gz
     dest: /var/www/html/
     remote_src: yes
+  become: yes
 
 - name: Add group "wordpress"
   group: name=wordpress
+  become: yes
 
 - name: Add user "wordpress"
   user: name=wordpress password=wordpress group=wordpress home=/var/www/html/
+  become: yes
 
 - name: Fetch random salts for WordPress config
   local_action: command curl https://api.wordpress.org/secret-key/1.1/salt/
@@ -24,7 +27,8 @@
 
 - name: Copy WordPress config file
   template: src=wp-config.php dest=/var/www/html/wordpress/
+  become: yes
 
 - name: Change ownership of WordPress installation
   file: path=/var/www/html/wordpress/ owner=wordpress group=wordpress state=directory recurse=yes setype=httpd_sys_content_t
-
+  become: yes

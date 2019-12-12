@@ -1,7 +1,7 @@
 ---
 - name: installation Mysqls
   apt:
-    name: mariadb-server-10.1,python-mysqldb
+    name: mariadb-server,python-mysqldb
     state: latest
   become: yes
 
