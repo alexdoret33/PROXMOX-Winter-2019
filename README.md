@@ -77,10 +77,10 @@ Nous allons commencer par installer un serveur Proxmox sur un serveur hébergé 
 *Moyen de sauvegarde :* Tous les matins une sauvegarde sera réalisée de chacune des VM via un playbook qui lancera des commandes `vzdump`.
 **Exemple :** `ansible-playbook -i ....`
 
-*Création d'une VM :* Lancer le playbook "Nom_du_Playbook" qui créera la VM voulue.
-**Exemple :** `ansible-playbook playbook-clone_VM -i hosts -e "template=<NUMBER> ip=<IP_ADRESS> vmid= VM_ID name=<NAME> memory=<NUMBER_IN_NB> cores=<INTEGER> taille=<NUMBERS_IN_GB>"`
+*Création d'une VM :* Lancer le playbook "playbook-create_VM.yml" qui créera la VM voulue.
+**Exemple :** `ansible-playbook playbook-create_VM -i hosts -e "template=<NUMBER> ip=<IP_ADRESS> vmid=<VMID> name=<NAME> memory=<NUMBER_IN_NB> cores=<INTEGER> taille=<NUMBERS_IN_GB>"`
 
-*Suppression d'une VM :* Lancer le playbook "Nom_du_Playbook" afin de supprimer la VM correspondante. **Exemple :** `ansible-playbook -i ....`
+*Suppression d'une VM :* Lancer le playbook "Destroy_VM.yml" afin de supprimer la VM correspondante. **Exemple :** `ansible-playbook Destroy_VM.yml -i hosts -e "vmid=<VMID_DELETED_VM>"`
 
 ### 10. Problème rencontré :
 
