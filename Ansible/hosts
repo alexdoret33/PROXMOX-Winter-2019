@@ -1,2 +1,2 @@
 [Proxmox]
-91.121.112.154:8006
+91.121.112.154 ansible_connection=ssh ansible_user=jonathan
