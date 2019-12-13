@@ -40,7 +40,7 @@ Proxmox est une solution de virtualisation basé sur Linux KVM (Debian 64bits) p
 
 ### 5. Qu'est-ce que pfSense ?
 
-pfSense est un pare-fedu open source, il utilise Packet Filter pour des fonctions de routage et de NAT lui permettant de connecter plusieurs réseaux informatiques. Il comporte l'équivalent libre des outils et services utilisés habituellement sur des routeurs professionnels propriétaires. pfSense convient pour la sécurisation d'un réseau domestique ou de petite entreprise.
+pfSense est un pare-feu open source, il utilise Packet Filter pour des fonctions de routage et de NAT lui permettant de connecter plusieurs réseaux informatiques. Il comporte l'équivalent libre des outils et services utilisés habituellement sur des routeurs professionnels propriétaires. pfSense convient pour la sécurisation d'un réseau domestique ou de petite entreprise.
 
 Après une brève installation manuelle pour assigner les interfaces réseaux, il s'administre ensuite à distance depuis l'interface web et gère nativement les VLAN.
 
