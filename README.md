@@ -74,16 +74,17 @@ Nous allons commencer par installer un serveur Proxmox sur un serveur hébergé 
 
 ### 9. Gestion du Maintien en Conditions Opérationnelles : 
 
-*Moyen de sauvegarde :* Tous les matins une sauvegarde sera réalisée de chacune des VM via un playbook qui lancera des commandes `qm`.
+*Moyen de sauvegarde :* Tous les matins une sauvegarde sera réalisée de chacune des VM via un playbook qui lancera des commandes `qm`.  
 **Exemple :** `ansible-playbook playbook-snapshot_VM.yml -i hosts -e "vmid=<VMID> snapname=<NAME>"`
 
 Mais nous n'avons pas pu le valider car pour effectuer un snapshot il nous faut l'offre payante.
 Et l'option Backup nécessite un autre disque dur dans notre noeud proxmox. Mais nous n'avons loué qu'un seul disque.
 
-*Création d'une VM :* Lancer le playbook "playbook-create_VM.yml" qui créera la VM voulue.
+*Création d'une VM :* Lancer le playbook "playbook-create_VM.yml" qui créera la VM voulue.  
 **Exemple :** `ansible-playbook playbook-create_VM.yml -i hosts -e "template=<NUMBER> ip=<IP_ADRESS> vmid=<VMID> name=<NAME> memory=<NUMBER_IN_MB> cores=<INTEGER> taille=<NUMBERS_IN_GB>"`
 
-*Suppression d'une VM :* Lancer le playbook "Destroy_VM.yml" afin de supprimer la VM correspondante. **Exemple :** `ansible-playbook playbook-destroy_VM.yml -i hosts -e "vmid=<VMID_DELETED_VM>"`
+*Suppression d'une VM :* Lancer le playbook "Destroy_VM.yml" afin de supprimer la VM correspondante.   
+**Exemple :** `ansible-playbook playbook-destroy_VM.yml -i hosts -e "vmid=<VMID_DELETED_VM>"`
 
 ### 10. Problème rencontré :
 
