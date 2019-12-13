@@ -25,4 +25,4 @@
   
   - name: Lancement de la VM
     command:
-      cmd: sudo qm start "{{ vmid }}"    
+      cmd: sudo qm start "{{ vmid }}" 

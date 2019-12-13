@@ -1,0 +1,8 @@
+---
+- hosts: all
+  connection: local
+
+  tasks:
+  - name: Snapshot d'une VM 
+    command: 
+      cmd: sudo qm snapshot "{{ vmid }}" "{{ snapname }}" --vmstate 1
