@@ -1,6 +1,9 @@
 - hosts: all
   connection: local
   tasks:
-  - name: Destroy VM 
+  - name: Arrêt VM 
+    command: 
+      cmd: sudo qm stop "{{ vmid }}"
+  - name: Suppression de VM 
     command: 
       cmd: sudo qm destroy "{{ vmid }}" --purge=true

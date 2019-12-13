@@ -20,7 +20,7 @@ Serveur Proxmox hébergé chez Kimsufi :
 Processeur : i5-750 4 coeurs 2.67GHz.  
 RAM : 16Go DDR3 1333MHz.  
 Disque dur : 2To.  
-OS : Linux Debian 10.            
+OS : Linux Debian 10.  
 Nom de la VM : Prox6Node1  
 
 ### 2. Inventaire Technologique :
@@ -74,13 +74,16 @@ Nous allons commencer par installer un serveur Proxmox sur un serveur hébergé 
 
 ### 9. Gestion du Maintien en Conditions Opérationnelles : 
 
-*Moyen de sauvegarde :* Tous les matins une sauvegarde sera réalisée de chacune des VM via un playbook qui lancera des commandes `vzdump`.
-**Exemple :** `ansible-playbook -i ....`
+*Moyen de sauvegarde :* Tous les matins une sauvegarde sera réalisée de chacune des VM via un playbook qui lancera des commandes `qm`.
+**Exemple :** `ansible-playbook playbook-snapshot_VM.yml -i hosts -e "vmid=<VMID> snapname=<NAME>"`
+
+Mais nous n'avons pas pu le valider car pour effectuer un snapshot il nous faut l'offre payante.
+Et l'option Backup nécessite un autre disque dur dans notre noeud proxmox. Mais nous n'avons loué qu'un seul disque.
 
 *Création d'une VM :* Lancer le playbook "playbook-create_VM.yml" qui créera la VM voulue.
-**Exemple :** `ansible-playbook playbook-create_VM -i hosts -e "template=<NUMBER> ip=<IP_ADRESS> vmid=<VMID> name=<NAME> memory=<NUMBER_IN_NB> cores=<INTEGER> taille=<NUMBERS_IN_GB>"`
+**Exemple :** `ansible-playbook playbook-create_VM.yml -i hosts -e "template=<NUMBER> ip=<IP_ADRESS> vmid=<VMID> name=<NAME> memory=<NUMBER_IN_MB> cores=<INTEGER> taille=<NUMBERS_IN_GB>"`
 
-*Suppression d'une VM :* Lancer le playbook "Destroy_VM.yml" afin de supprimer la VM correspondante. **Exemple :** `ansible-playbook Destroy_VM.yml -i hosts -e "vmid=<VMID_DELETED_VM>"`
+*Suppression d'une VM :* Lancer le playbook "Destroy_VM.yml" afin de supprimer la VM correspondante. **Exemple :** `ansible-playbook playbook-destroy_VM.yml -i hosts -e "vmid=<VMID_DELETED_VM>"`
 
 ### 10. Problème rencontré :
 
@@ -92,6 +95,7 @@ Nous avons du modifier la lib promox d'ansible afin de règler le soucis. Le pro
 Il suffit de modifier le fichier :
 
 `/home/User/.local/lib/python3.6/site-packages/ansible/modules/cloud/misc/proxmox_kvm.py`
+
 Et modifier la ligne : 
 
 `PVE_MAJOR_VERSION = 3 if float(proxmox.version.get()['version']) < 4.0 else 4`
