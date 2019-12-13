@@ -9,8 +9,17 @@
   become: yes
   with_items:
     - apache2
-    - mysql-server
-    - php7.2-mysql
-    - php7.2
-    - libapache2-mod-php7.2
+    - mariadb-server
+    - php7.3
+    - libapache2-mod-php7.3
     - python-mysqldb
+    - php7.3-mysql 
+    - php7.3-curl 
+    - php7.3-json 
+    - php7.3-gd 
+    - php7.3-intl 
+    - php7.3-sqlite3 
+    - php7.3-gmp 
+    - php7.3-mbstring 
+    - php7.3-xml 
+    - php7.3-zip
