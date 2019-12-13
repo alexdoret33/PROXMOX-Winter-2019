@@ -15,3 +15,24 @@
     enabled: yes
     name: apache2
   become: yes
+
+- name: WordPress Default page
+  lineinfile:
+    path: /etc/apache2/sites-available/000-default.conf
+    regexp: '^DocumentRoot /var/www/html/'
+    line: DocumentRoot /var/www/html/wordpress/
+  become: yes
+
+- name: stop apache2
+  systemd:
+    state: stopped
+    enabled: yes
+    name: apache2
+  become: yes   
+
+- name: Start apache2
+  systemd:
+    state: started
+    enabled: yes
+    name: apache2
+  become: yes  
