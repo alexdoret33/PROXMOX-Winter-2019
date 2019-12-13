@@ -13,12 +13,12 @@
 
   - name: Taille du HDD
     command: 
-      cmd: sudo qm resize "{{ vmid }}" scsi0 "{{ taille }}"G
+      cmd: sudo qm resize "{{ vmid }}" scsi0 "{{ disk }}"G
 
   - name: Configuration CPU
     command:
       cmd: sudo qm set "{{ vmid }}" --cores "{{ cores }}" 
-      
+
   - name: Configuration réseau 
     command:
       cmd: sudo qm set "{{ vmid }}" --ipconfig0 ip="{{ ip }}"/24,gw=192.168.10.254
