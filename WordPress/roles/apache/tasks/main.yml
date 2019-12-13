@@ -17,10 +17,10 @@
   become: yes
 
 - name: WordPress Default page
-  lineinfile:
+  replace:
     path: /etc/apache2/sites-available/000-default.conf
-    regexp: '^DocumentRoot /var/www/html/'
-    line: DocumentRoot /var/www/html/wordpress/
+    regexp: 'DocumentRoot /var/www/html'
+    replace: 'DocumentRoot /var/www/html/wordpress/'
   become: yes
 
 - name: stop apache2
