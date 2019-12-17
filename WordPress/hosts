@@ -1,2 +1,2 @@
 [wordpress]
-91.121.112.154:2224	ansible_connection=ssh	ansible_user=projetadmin
+192.168.10.21	ansible_connection=ssh	ansible_user=projetadmin
