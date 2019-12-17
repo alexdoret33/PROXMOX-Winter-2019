@@ -1,2 +1,2 @@
 [Proxmox]
-91.121.112.154 ansible_connection=ssh ansible_user=jonathan
+10.0.0.1 ansible_connection=ssh ansible_user=jonathan
