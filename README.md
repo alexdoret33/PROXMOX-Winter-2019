@@ -25,15 +25,16 @@ Nom de la VM : Prox6Node1
 
 ### 2. Inventaire Technologique :
 
-Pour notre Lab nous allons utiliser la solution Proxmox 6.0.15 sur une Debian 10.  
-Ansible 2.9 afin de lancer des payblooks de création de VMs ou de configuration.  
-Et déployer 3 VMs avec un orchestrateur Jenkins 2.205, une VM avec pfSense 2.4.4-p3,un site web sous WordPress en 5.2.4 et Cloud init pour l'approvisonnement des VMs.  
+Pour notre Lab, nous allons utiliser la solution Proxmox 6.0.15 sur une Debian 10.  
+Mais aussi Ansible 2.9 afin de lancer des Playbook de création de VMs et/ou de configuration.  
+Et enfin déployer 3 VMs avec un orchestrateur Jenkins 2.205, une VM avec pfSense 2.4.4-p3, un site web sous WordPress en 5.2.4 et Cloud init pour l'approvisonnement des VMs.  
 
 ### 3. But du projet :
 
-Le projet consiste à faire monter des VM avec Ansible sur le serveur Proxmox. 
-Le but de ce projet est de pouvoir facilement déployer une infrastructure (Monitorée et sauvegardée).  
-Et également pouvoir changer les configurations des VMs distantes.
+Notre projet consiste à créer des VM avec Ansible sur notre serveur Proxmox, hébergé chez Kimsufi. 
+Le but de ce projet est de pouvoir facilement et rapidement déployer une infrastructure simple qui pourra être monitorée mais aussi sauvegardée.
+Notre outil, en l’occurrence Proxmox, nous permet de changer les configurations des VMs distantes.
+Pour étayer tout ça, nous démontrerons le bon fonctionnement de nos outils par le biais de l’exécution d’un Playbook Ansible qui installera WordPress.
 
 ### 4. Qu'est-ce que Proxmox ?
 Proxmox est une solution de virtualisation basé sur Linux KVM (Debian 64bits) permettant de créer des machines virtuelles de type OpenVZ et KVM. Il s’agit d’une solution de type bare metal dans le sens de directement opérationnel sur la machine, c’est-à-dire sans OS. Ce nom caractérise les hyperviseurs de type 1 (on dit aussi natif) dans lequel l’hyperviseur minimaliste, allégé et optimisé, se conduit comme un moniteur démarrant le matériel, connectant le réseau et lançant les machines virtuelles. ESX Server de VMware, LPAR de IBM ou encore HYPER-V de Microsoft sont des hyperviseurs type 1. Proxmox s’administre via une interface web (https://serveur_proxmox:8006/ ) et fournit une vue globale de l’ensemble des VM installées . En plus de cette interface web, il est tout à fait possible de créer des scripts pour automatiser certaines tâches, via les commandes natives de OpenVZ (vzctl).
@@ -48,7 +49,7 @@ Comme sur les distributions Linux, pfSense intègre aussi un gestionnaire de paq
 
 ## pfSense dans notre projet :
 
-Le pfSense est utilisé pour faire du PAT et du NAT.
+pfSense est utilisé pour faire du PAT et du NAT.
 En effet, des règles sont crées pour rediriger la connexion vers la VM en fonction du port.
 
 *Exemple :* 
@@ -67,18 +68,18 @@ Donc pour chaque VM crée, il faut une règle Proxmox associée pour pouvoir s'y
 
 ### 7. Déroulement du projet :
 
-Nous allons commencer par installer un serveur Proxmox sur un serveur hébergé et faire monter des VMs Linux avec des configurations spécifiques. Un serveur WordPress et un pfSense ce qui va permettre de faire du NAT et du PAT pour accéder aux VM crée à l'aide d'Ansible. Afin de pouvoir déployer un environnement / configuration à distance sur des serveurs qui ne sont pas hébergés chez nous, nous allons utiliser une technologie différente de celle que l'on utilise habituellement : Proxmox. 
+Nous allons commencer par installer un serveur Proxmox sur un serveur hébergé afin de faire monter des VMs Linux avec des configurations spécifiques. Un serveur WordPress mais aussi un pfSense, ce qui va permettre de faire du NAT et du PAT pour accéder aux VM crée à l'aide d'Ansible. Tout ça pour pouvoir déployer un environnement / configuration à distance sur des serveurs qui ne sont pas hébergés chez nous, et pour ça nous allons utiliser une technologie différente de celle que l'on utilise habituellement : Proxmox. 
 
 ### 8. Schéma d'architecture :
 ![alt text](https://github.com/alexdoret33/PROXMOX-Winter-2019/blob/master/Images/Diagramme.jpg)
 
 ### 9. Gestion du Maintien en Conditions Opérationnelles : 
 
-*Moyen de sauvegarde :* Tous les matins une sauvegarde sera réalisée de chacune des VM via un playbook qui lancera des commandes `qm`.  
+*Moyen de sauvegarde :* Tous les matins une sauvegarde de chacune des VM sera réalisée via un playbook qui lancera des commandes `qm`.  
 **Exemple :** `ansible-playbook playbook-snapshot_VM.yml -i hosts -e "vmid=<VMID> snapname=<NAME>"`
 
-Mais nous n'avons pas pu le valider car pour effectuer un snapshot il nous faut l'offre payante.
-Et l'option Backup nécessite un autre disque dur dans notre noeud proxmox. Mais nous n'avons loué qu'un seul disque.
+Mais nous n'avons pas pu le valider car pour effectuer un snapshot il nous faut l'offre payante... :(
+Et l'option Backup nécessite un autre disque dur dans notre noeud proxmox. Mais nous n'avons loué qu'un seul disque!
 
 *Création d'une VM :* Lancer le playbook "playbook-create_VM.yml" qui créera la VM voulue.  
 **Exemple :** `ansible-playbook playbook-create_VM.yml -i hosts -e "template=<NUMBER> ip=<IP_ADRESS> vmid=<VMID> name=<NAME> memory=<NUMBER_IN_MB> cores=<INTEGER> disk=<NUMBERS_IN_GB>"`
@@ -86,13 +87,13 @@ Et l'option Backup nécessite un autre disque dur dans notre noeud proxmox. Mais
 *Suppression d'une VM :* Lancer le playbook "Destroy_VM.yml" afin de supprimer la VM correspondante.   
 **Exemple :** `ansible-playbook playbook-destroy_VM.yml -i hosts -e "vmid=<VMID_DELETED_VM>"`
 
-### 10. Problème rencontré :
+### 10. Problèmes rencontrés :
 
 Lors du lancement du playbook Ansible vers notre Promox nous avons eu une erreur : 
 
 `authorization on proxmox cluster failed with exception: invalid literal for float(): 6.0-4`
 
-Nous avons du modifier la lib promox d'ansible afin de règler le soucis. Le problème a été fixé mais pas intégré à Ansible.
+Nous avons du modifier la lib promox d'Ansible afin de règler le soucis. Le problème a été fixé mais pas intégré à Ansible.
 Il suffit de modifier le fichier :
 
 `/home/User/.local/lib/python3.6/site-packages/ansible/modules/cloud/misc/proxmox_kvm.py`
