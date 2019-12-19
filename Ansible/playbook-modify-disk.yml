@@ -4,4 +4,4 @@
   tasks: 
   - name: Taille du HDD
     command: 
-      cmd: sudo qm resize "{{ vmid }}" scsi0 "{{ disk }}"G
+      cmd: sudo qm resize "{{ vmid }}" scsi0 +"{{ disk }}"G
