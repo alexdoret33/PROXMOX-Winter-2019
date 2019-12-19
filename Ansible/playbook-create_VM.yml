@@ -5,7 +5,7 @@
   tasks:
   - name: Clone VM Template
     command: 
-      cmd: sudo qm clone "{{ template }}" "{{ vmid }}" --name "{{ name }}"
+      cmd: sudo qm clone "{{ template }}" --name "{{ name }}"
 
   - name: Definition de la mémoire
     command:
