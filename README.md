@@ -84,7 +84,7 @@ Et l'option Backup nécessite un autre disque dur dans notre noeud proxmox. Mais
 *Création d'une VM :* Lancer le playbook "playbook-create_VM.yml" qui créera la VM voulue.  
 **Exemple :** `ansible-playbook playbook-create_VM.yml -i hosts -e "template=<NUMBER> ip=<IP_ADRESS> vmid=<VMID> name=<NAME> memory=<NUMBER_IN_MB> cores=<INTEGER> disk=<NUMBERS_IN_GB>"`
 
-*Suppression d'une VM :* Lancer le playbook "Destroy_VM.yml" afin de supprimer la VM correspondante.   
+*Suppression d'une VM :* Lancer le playbook "Destroy_VM.yml" pour supprimer la VM correspondante.   
 **Exemple :** `ansible-playbook playbook-destroy_VM.yml -i hosts -e "vmid=<VMID_DELETED_VM>"`
 
 ### 10. Problèmes rencontrés :
