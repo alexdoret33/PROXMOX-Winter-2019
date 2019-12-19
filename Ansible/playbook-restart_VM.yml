@@ -1,0 +1,11 @@
+---
+- hosts: all
+  connection: local
+
+- name: Arrêt VM 
+  command: 
+    cmd: sudo qm stop "{{ vmid }}"
+
+- name: Démarrage de la VM
+  command:
+    cmd: sudo qm start "{{ vmid }}" 
